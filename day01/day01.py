@@ -20,9 +20,15 @@ class Frequency:
         self.currentFrequency = 0
 
     def calibrate(self, num: int): 
-        pass
+        self.currentFrequency += num
 
 
 # put your inputs file next to this file!
-lines = read_input('input.txt');
+lines = read_input('input.txt')
 # solve the problem here!
+f = Frequency()
+
+for freq in lines:
+    f.calibrate(freq)
+
+print(f.currentFrequency)

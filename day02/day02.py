@@ -15,3 +15,15 @@ def read_input(file_name):
 #a
 lines = read_input('input.txt')
 # solve the problem here!
+class Frequency:
+    def __init__(self):
+        self.currentFrequency = 0
+
+    def calibrate(self, num: int): 
+        self.currentFrequency += num
+
+
+f = Frequency()
+
+for freq in lines:
+    f.calibrate(freq)
