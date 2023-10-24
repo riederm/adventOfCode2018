@@ -1,4 +1,3 @@
-
 from typing import List;
 import os;
 import time;
@@ -18,17 +17,15 @@ def read_input(file_name):
 class Frequency:
     def __init__(self):
         self.currentFrequency = 0
-        self.uniqueFrequencies : List[int] = []
+        self.uniqueFrequencies = set()
 
-    def calibrate(self, num: int) -> bool:
+    def calibrate(self, num):
         self.currentFrequency += num
-        for frq in self.uniqueFrequencies:
-            if frq ==  self.currentFrequency:
-                return True
-        #no match found, add frequency to list
-        self.uniqueFrequencies.append(self.currentFrequency)
+        if self.currentFrequency in self.uniqueFrequencies:
+            return True
+        self.uniqueFrequencies.add(self.currentFrequency)
         #print(f"Pos: {len(self.uniqueFrequencies) + 1} Appended {self.currentFrequency}")
-        return False
+        return None
 
 # put your inputs file next to this file!
 lines = read_input('input1.txt')
@@ -36,11 +33,12 @@ lines = read_input('input1.txt')
 
 f = Frequency()
 
-retVal = False
-while False == retVal:
+retVal = None
+while retVal is None:
     for line in lines:
-        retVal = f.calibrate(line)        
-    print(f"Current is {f.currentFrequency}")
+        retVal = f.calibrate(line)
+        if retVal is True:
+            break        
+    print(f"Current is {f.currentFrequency}, uniqueFrqs: {len(f.uniqueFrequencies)}")
 
 print(f.currentFrequency)
-
