@@ -18,19 +18,29 @@ def read_input(file_name):
 class Frequency:
     def __init__(self):
         self.currentFrequency = 0
+        self.uniqueFrequencies : List[int] = []
 
-    def calibrate(self, num: int):
+    def calibrate(self, num: int) -> bool:
         self.currentFrequency += num
-        
-
+        for frq in self.uniqueFrequencies:
+            if frq ==  self.currentFrequency:
+                return True
+        #no match found, add frequency to list
+        self.uniqueFrequencies.append(self.currentFrequency)
+        #print(f"Pos: {len(self.uniqueFrequencies) + 1} Appended {self.currentFrequency}")
+        return False
 
 # put your inputs file next to this file!
-lines = read_input('input1.txt');
+lines = read_input('input1.txt')
 # solve the problem here!
 
 f = Frequency()
-for line in lines:
-    f.calibrate(int(line))
+
+retVal = False
+while False == retVal:
+    for line in lines:
+        retVal = f.calibrate(line)        
+    print(f"Current is {f.currentFrequency}")
 
 print(f.currentFrequency)
 
