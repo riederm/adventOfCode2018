@@ -2,6 +2,7 @@
 from typing import List;
 import os;
 import time;
+import numpy as np
 
 def read_input(file_name):
     current_path = os.path.dirname(__file__)
@@ -17,26 +18,33 @@ def read_input(file_name):
 
 class Frequency:
     def __init__(self):
-        self.input_file = "input.txt"
-        self.currentFrequency = 0
-        self.lines = read_input(self.input_file)
+        self.current_frequency = 0
+        self.first_rep = None
 
-    def calibrate(self, num: int):
-        self.currentFrequency += num
+    def calibration(self, num: int):
+        self.current_frequency  += num
 
-    def compare(self):
-        buf = int[len(self.lines)]
+    def detect_first_rep(self, inputs):
+        freq_dict = {}
+        self.current_frequency = 0
+        while (1):
+            for freq in inputs:
+                self.calibration(freq)
+                if self.current_frequency in freq_dict:
+                    self.first_rep = self.current_frequency
+                    return
+                else:
+                    freq_dict[self.current_frequency] = None
 
-        
 
-
-# put your inputs file next to this file!
-lines = read_input('input.txt')
-# solve the problem here!
 f = Frequency()
+inputs = read_input('input.txt')
 
-for freq in lines:
-    f.calibrate(freq) 
+for freq in inputs:
+    f.calibration(freq)
 
-print(f.currentFrequency)
+print("The sum of all frequencies is ", f.current_frequency)
 
+f.detect_first_rep(inputs)
+
+print("The first repeating frequency is ", f.first_rep)
