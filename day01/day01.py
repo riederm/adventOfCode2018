@@ -17,10 +17,17 @@ def read_input(file_name):
 
 class Frequency:
     def __init__(self):
+        self.input_file = "input.txt"
         self.currentFrequency = 0
+        self.lines = read_input(self.input_file)
 
-    def calibrate(self, num: int): 
+    def calibrate(self, num: int):
         self.currentFrequency += num
+
+    def compare(self):
+        buf = int[len(self.lines)]
+
+        
 
 
 # put your inputs file next to this file!
@@ -29,6 +36,7 @@ lines = read_input('input.txt')
 f = Frequency()
 
 for freq in lines:
-    f.calibrate(freq)
+    f.calibrate(freq) 
 
 print(f.currentFrequency)
+
