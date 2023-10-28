@@ -2,7 +2,6 @@
 from typing import List;
 import os;
 import time;
-import numpy as np
 
 def read_input(file_name):
     current_path = os.path.dirname(__file__)
@@ -27,6 +26,7 @@ class Frequency:
     def detect_first_rep(self, inputs):
         freq_dict = {}
         self.current_frequency = 0
+
         while (1):
             for freq in inputs:
                 self.calibration(freq)
