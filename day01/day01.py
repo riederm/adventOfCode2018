@@ -16,15 +16,18 @@ def read_input(file_name):
 
 class Frequency:
     def __init__(self):
-        self.currentFrequency = 0
+        self.currentFrequency_1 = 0
+        self.currentFrequency_2 = 0
         self.uniqueFrequencies = set()
 
-    def calibrate(self, num):
-        self.currentFrequency += num
-        if self.currentFrequency in self.uniqueFrequencies:
+    def calibrate_task1(self, num):
+        self.currentFrequency_1 += num
+
+    def calibrate_task2(self, num):
+        self.currentFrequency_2 += num
+        if self.currentFrequency_2 in self.uniqueFrequencies:
             return True
-        self.uniqueFrequencies.add(self.currentFrequency)
-        #print(f"Pos: {len(self.uniqueFrequencies) + 1} Appended {self.currentFrequency}")
+        self.uniqueFrequencies.add(self.currentFrequency_2)
         return None
 
 # put your inputs file next to this file!
@@ -33,12 +36,15 @@ lines = read_input('input1.txt')
 
 f = Frequency()
 
+for line in lines:
+    f.calibrate_task1(line)
+print(f"Task 1: frq {f.currentFrequency_1}")
+
+
 retVal = None
 while retVal is None:
     for line in lines:
-        retVal = f.calibrate(line)
+        retVal = f.calibrate_task2(line)
         if retVal is True:
             break        
-    print(f"Current is {f.currentFrequency}, uniqueFrqs: {len(f.uniqueFrequencies)}")
-
-print(f.currentFrequency)
+print(f"Task 2: Current is {f.currentFrequency_2}, uniqueFrqs: {len(f.uniqueFrequencies)}")

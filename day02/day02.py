@@ -36,3 +36,24 @@ for line in lines:
 result = count_2_same * count_3_same
 
 print(f"Result: {result}")
+
+for i in range(len(lines)):
+    for j in range(i + 1, len(lines)):
+        err_cnt = 0
+        idx_rem = 0
+        for idx in range(len(lines[0])):             
+            if lines[i][idx] != lines [j][idx]:
+                err_cnt += 1
+                idx_rem = idx
+            #endif
+        if err_cnt == 1:
+            print(f"Line {i} and {j} are right. Wrong letter at {idx_rem} is {lines[i][idx_rem]}")
+            print(f"lines were:\n{lines[i]}\n{lines[j]}")
+
+            output_line = ''.join([char for char_idx, char in enumerate(lines[i]) if char_idx != idx_rem])
+            print(f"Pass:\n{output_line}")
+        #endfor idx
+    #endfor j
+
+
+        
