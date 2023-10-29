@@ -15,22 +15,41 @@ def read_input(file_name):
         print(f"An error occurred: {e}")
     return lines
 
+def calibration(inputs):
+    sums = np.zeros(len(inputs))
+    i = 0
+    a = 0
+    csums = np.cumsum(inputs)
+    for line in inputs:
+        a += line
+        sums[i] = a
+        if (a != csums[i]):
+            print("ERROR")
+        i += 1
+    
+    return sums
+
+
+
 def freq_calculations(inputs):
-    cumlsum_inputs = np.cumsum(inputs)
+    cumlsum_inputs = calibration(inputs)# np.cumsum(inputs)
     print("The sum of all frequencies is ", cumlsum_inputs[-1])
     cumlsum_dict = {}
+    i = 0
     while True:
 
-        i = 0
+        
         for line in cumlsum_inputs:
-            i += 1
+            
             if line in cumlsum_dict:
                 print("The first repeating frequency is ", line)
-                print(cumlsum_inputs[i])
+                print(cumlsum_dict[line])
                 return
             else:
-                cumlsum_dict[line] = None
+                cumlsum_dict[line] = i
+            i += 1
         cumlsum_inputs += cumlsum_inputs[-1]
+        
 
 
 inputs = read_input('input.txt')
