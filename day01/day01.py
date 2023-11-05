@@ -1,6 +1,10 @@
 from typing import List;
 import os;
 import time;
+import matplotlib.pyplot as plt
+import numpy as np
+from binTree import BinTree
+
 
 def read_input(file_name):
     current_path = os.path.dirname(__file__)
@@ -18,7 +22,7 @@ class Frequency:
     def __init__(self):
         self.currentFrequency_1 = 0
         self.currentFrequency_2 = 0
-        self.uniqueFrequencies = set()
+        self.uniqueFrequencies = BinTree()
 
     def calibrate_task1(self, num):
         self.currentFrequency_1 += num
@@ -42,9 +46,22 @@ print(f"Task 1: frq {f.currentFrequency_1}")
 
 
 retVal = None
+times = []
+start_time = time.time()
+
 while retVal is None:
     for line in lines:
         retVal = f.calibrate_task2(line)
         if retVal is True:
-            break        
-print(f"Task 2: Current is {f.currentFrequency_2}, uniqueFrqs: {len(f.uniqueFrequencies)}")
+            break  
+    times.append(time.time()- start_time)
+
+x = range(len(times))
+plt.plot(x, times)
+plt.title('Runtime complexity')
+plt.xlabel('X axis')
+plt.ylabel('Elapsed time')
+
+plt.savefig("plot1.png")
+
+#print(f"Task 2: Current is {f.currentFrequency_2}, uniqueFrqs: {len(f.uniqueFrequencies)}")
