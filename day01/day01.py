@@ -22,7 +22,7 @@ class Frequency:
     def __init__(self):
         self.currentFrequency_1 = 0
         self.currentFrequency_2 = 0
-        self.uniqueFrequencies = BinTree()
+        self.uniqueFrequencies = list()
 
     def calibrate_task1(self, num):
         self.currentFrequency_1 += num
@@ -31,7 +31,7 @@ class Frequency:
         self.currentFrequency_2 += num
         if self.currentFrequency_2 in self.uniqueFrequencies:
             return True
-        self.uniqueFrequencies.add(self.currentFrequency_2)
+        self.uniqueFrequencies.append(self.currentFrequency_2)
         return None
 
 # put your inputs file next to this file!
@@ -48,13 +48,19 @@ print(f"Task 1: frq {f.currentFrequency_1}")
 retVal = None
 times = []
 start_time = time.time()
+last_time  = None
 
 while retVal is None:
     for line in lines:
         retVal = f.calibrate_task2(line)
         if retVal is True:
-            break  
-    times.append(time.time()- start_time)
+            break
+    if last_time is not None:  
+        times.append(last_time - start_time)
+        start_time = last_time
+        last_time = time.time()
+    else:
+        last_time = time.time()
 
 x = range(len(times))
 plt.plot(x, times)

@@ -1,6 +1,5 @@
 class BinTree:
-    def __init__(self, print_debug = False):
-        self.print_debug = print_debug
+    def __init__(self):
         self.data = []
 
     def _print_entries(self):
@@ -21,12 +20,8 @@ class BinTree:
         #at least two elements are in the array
         ret_val = self._binary_search_(number, len(self.data) - 1, 0)
         if ret_val[0] == True:
-            if self.print_debug == True:
-                print(f"Element {number} is alread at pos {ret_val[1]} in set")
             return #entry is already in set
         elif ret_val[0] == False:
-            if self.print_debug == True:
-                print(f"Inserted element {number} at position {ret_val[1]}")
             self.data.insert(ret_val[1], number)
             
         
