@@ -2,5 +2,7 @@
 
 adven of code 2018 https://adventofcode.com/2018
 
-- save your puzzle input into input.txt next to the puzzle's python file
-- run the puzzle using `python day01/day01.py` or move into the directory `cd day01` and run `python day01.py`
+Don't develop your solution on this branch.
+There is a branch ´js´ for javascript, or a branch ´py´ for python
+
+Switch to the appropriate branch!
